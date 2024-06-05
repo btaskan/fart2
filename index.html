@@ -18,19 +18,33 @@
             font-weight: bold;
             color: #000;
         }
+        button {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <h1>OSURUK</h1>
     <audio id="fartSound" src="fart.mp3" type="audio/mpeg"></audio>
+    <button id="playButton">Play Sound</button>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const audio = document.getElementById('fartSound');
-            audio.play().catch(error => {
-                console.log('Autoplay was prevented:', error);
-                alert('Click OK to hear the sound!');
+            const playButton = document.getElementById('playButton');
+
+            const playSound = () => {
+                audio.play().catch(error => {
+                    console.log('Autoplay was prevented:', error);
+                    playButton.style.display = 'block';
+                });
+            };
+
+            playButton.addEventListener('click', () => {
                 audio.play();
+                playButton.style.display = 'none';
             });
+
+            playSound();
         });
     </script>
 </body>
